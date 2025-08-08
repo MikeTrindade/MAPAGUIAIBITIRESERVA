@@ -1,0 +1,81 @@
+Instrução completa para o agente: 
+Instrução para o agente: A partir deste momento, programe exatamente conforme as informações e estrutura que fornecerei, sem alterar, resumir, interpretar ou modificar nada. Quero que a estrutura do sistema siga fielmente os dados e requisitos já definidos por mim. Se houver qualquer dúvida ou dificuldade técnica, apenas sinalize que precisa de apoio para que eu ou outro assistente finalize a parte manualmente. Não altere a lógica, design, funcionalidade, nome de campos, nem dados geográficos. Não crie variações ou nomes automáticos. O sistema será desenvolvido com base nas seguintes diretrizes e dados já preparados por mim (estrutura de interface, nome do sistema, visual, unidades, coordenadas, funcionalidades e objetivos finais). Apenas transforme essas informações diretamente em código funcional, sem reinterpretação. ________________________________________ 
+🎯 Objetivo do sistema: Vamos criar um sistema que funcionará como um guia de mapa interativo da Associação Parque Ibiti Reserva. 
+• Será acessado por QR Code na portaria.
+ • O visitante poderá digitar o nome da unidade ou local comum e será direcionado via GPS.
+• o botão de pesquisa, ao clicar no botão "encontrar localização" ou ao clicar na lupa ou ao digitar a tecla enter a busca tem que acontecer, caso a pessoa digitou errado, deve ter um aviso simples local não existe, e quando a pessoa digita corretamente e clica em buscar pesquisar ou enter o resultado deve subir para telca principal, tornando assim mais intuitivo e dinâmico.
+• O link deve abrir usando o esquema geo: latitude, longitude para funcionar com todos app de navegação.
+• A interface precisa ser extremamente leve, responsiva e intuitiva, compatível com todos sistemas moveis smartphones, tablets e computadores etc. 
+📛 Nome do sistema: ibitidigitalmap 
+🎨 Identidade visual: 
+• Cores principais: Azul celeste (#00BFFF) e Verde claro (#7CFC00) ou tons semelhantes. 
+• Logo da Associação: Ibiti Reserva 
+• Logo e nome do desenvolvedor: Mike Trindade – Desenvolvedor 
+• Rodapé com: © Todos os direitos reservados | Desenvolvido por Mike Trindade | ________________________________________ 
+🧠 Funcionalidades principais: 
+1. Tela inicial com logo, slogan e campo de busca. 
+2. Campo de pesquisa de texto, com sugestões automáticas conforme digitação (autocomplete).
+3. Botão de pesquisa que localiza o item digitado (unidade ou área comum). 
+4. Abertura automática do app de GPS no celular com a coordenada do local. 
+5. Modo responsivo e compatível com dispositivos móveis.
+6. Sistema instalável (PWA) como se fosse um aplicativo. 
+7. Design limpo e contrastado, com foco em simplicidade e eficiência.
+ 8. Área interativa (posterior): mapa visual com ícones clicáveis. ________________________________________ 
+📍 Dados de entrada: 🏡 Unidades residenciais: 
+• Quadras de A1 a A8, B1 a B8, C1 a C5, D1 a D6 
+• Cada unidade identificada por "Quadra Número-Unidade" (ex: D5-01, C5-09) 
+• Exemplos com coordenadas:  D5-01: -23.43820695194719, -47.447510367357154 
+o C5-09: -23.439878922806496, -47.450280028240336 
+o D4-13: -23.439338713723654, -47.44811222945011 
+o D4-12: -23.43935687121033, -47.44810085208478 
+As demais unidades devem ser listadas no JSON com seus identificadores, e poderão ser complementadas futuramente com coordenadas. Total das unidades e locais: Iniciaremos pelas quadras A; 
+• Quadra A1 tem do 1 até 17 unidades 
+• Quadra A2 do 1 ao 38 
+• A3 – do 01 ao 48 
+• A4- do 01 ao 34 
+• A5- do 01 ao 16 
+• A6- do 01 ao 17 
+• A7- do 01 ao 28 
+• A8- do 01 ao 16 Agora quadras B; 
+• B1- do0 1 ao 14 
+• B2- do 01 ao 28 
+• B3- do 01 ao 36
+ • B4- do 01 ao 56 
+• B5- do 01 ao 42
+ • B6- do 01 ao 56 
+• B7- do 01 ao 48 
+• B8- do 01 ao 55 Quadras C; 
+• C1- do 01 ao 33 
+• C2- do 01 ao 19 
+• C3- do 01 ao 40 
+• C4- do 01 ao 50 
+• C5- do 01 ao 59 
+Unidade C5-09: -23.439878922806496, -47.450280028240336 
+Agora as quadras D; 
+• D1- do 01 ao 41
+• D2- do 01 ao 44 
+• D3- do 01 ao 55 
+• D4- do 01 ao 54 
+D4-13: -23.439338713723654, -47.44811222945011 
+D4-12: -23.43935687121033, -47.44810085208478 
+• D5- do 01 ao 37 
+Unidade D5-01: -23.43820695194719, -47.447510367357154 
+• D6- do 01 ao 48 Agora 
+vou sitar as áreas comuns de lazer que também vamos colocar localização para cada uma delas: 
+• Administração: -23.4437058069778, -47.44818997935426 
+• Recepção: -23.4437058069778, -47.44818997935426 
+• Salão de festa: -23.442867324552367, -47.44800151424217 
+• Sala de jogos: -23.4429239232165, -47.44811684922272 
+• Piscinas: -23.44254741860359, -47.44796396331827 
+• Quiosques 1: -23.442463750755188, -47.44796932773089 
+• Quiosque 2: -23.44232102314549, -47.44801492528135 
+• Quadras de tenis 1 e 2: -23.441949438466548, -47.44938285184038 
+• Quadra poliesportiva: -23.441617226111916, -47.449610839605505
+• Academia ao ar livre: -23.441255482828737, -47.449752996674555 
+• Espaço Pet: -23.439359870841333, -47.45038379605434 
+• Parquinho / playground do Lago: -23.439411549255144, -47.45013166842243 
+• Lago 1: -23.440710595686216, -47.44950402750768 
+• Lago 2: -23.439984642284628, -47.44976420177669 
+• Lago 3: -23.43917947799386, -47.44981111938618 
+• Trilha ecológica: -23.44170667389396, -47.44814888034575 
+• Campo: -23.44005075080339, -47.44670562108646

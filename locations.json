@@ -1,0 +1,202 @@
+{
+  "unidades": {
+    "A1": {
+      "total": 17,
+      "coordenadas": {}
+    },
+    "A2": {
+      "total": 38,
+      "coordenadas": {}
+    },
+    "A3": {
+      "total": 48,
+      "coordenadas": {}
+    },
+    "A4": {
+      "total": 34,
+      "coordenadas": {}
+    },
+    "A5": {
+      "total": 16,
+      "coordenadas": {}
+    },
+    "A6": {
+      "total": 17,
+      "coordenadas": {}
+    },
+    "A7": {
+      "total": 28,
+      "coordenadas": {}
+    },
+    "A8": {
+      "total": 16,
+      "coordenadas": {}
+    },
+    "B1": {
+      "total": 14,
+      "coordenadas": {}
+    },
+    "B2": {
+      "total": 28,
+      "coordenadas": {}
+    },
+    "B3": {
+      "total": 36,
+      "coordenadas": {}
+    },
+    "B4": {
+      "total": 56,
+      "coordenadas": {}
+    },
+    "B5": {
+      "total": 42,
+      "coordenadas": {}
+    },
+    "B6": {
+      "total": 56,
+      "coordenadas": {}
+    },
+    "B7": {
+      "total": 48,
+      "coordenadas": {}
+    },
+    "B8": {
+      "total": 55,
+      "coordenadas": {}
+    },
+    "C1": {
+      "total": 33,
+      "coordenadas": {}
+    },
+    "C2": {
+      "total": 19,
+      "coordenadas": {}
+    },
+    "C3": {
+      "total": 40,
+      "coordenadas": {}
+    },
+    "C4": {
+      "total": 50,
+      "coordenadas": {}
+    },
+    "C5": {
+      "total": 59,
+      "coordenadas": {
+        "C5-09": {
+          "lat": -23.439878922806496,
+          "lng": -47.450280028240336
+        }
+      }
+    },
+    "D1": {
+      "total": 41,
+      "coordenadas": {}
+    },
+    "D2": {
+      "total": 44,
+      "coordenadas": {}
+    },
+    "D3": {
+      "total": 55,
+      "coordenadas": {}
+    },
+    "D4": {
+      "total": 54,
+      "coordenadas": {
+        "D4-13": {
+          "lat": -23.439338713723654,
+          "lng": -47.44811222945011
+        },
+        "D4-12": {
+          "lat": -23.43935687121033,
+          "lng": -47.44810085208478
+        }
+      }
+    },
+    "D5": {
+      "total": 37,
+      "coordenadas": {
+        "D5-01": {
+          "lat": -23.43820695194719,
+          "lng": -47.447510367357154
+        }
+      }
+    },
+    "D6": {
+      "total": 48,
+      "coordenadas": {}
+    }
+  },
+  "areas_comuns": {
+    "Administração": {
+      "lat": -23.4437058069778,
+      "lng": -47.44818997935426
+    },
+    "Recepção": {
+      "lat": -23.4437058069778,
+      "lng": -47.44818997935426
+    },
+    "Salão de festa": {
+      "lat": -23.442867324552367,
+      "lng": -47.44800151424217
+    },
+    "Sala de jogos": {
+      "lat": -23.4429239232165,
+      "lng": -47.44811684922272
+    },
+    "Piscinas": {
+      "lat": -23.44254741860359,
+      "lng": -47.44796396331827
+    },
+    "Quiosques 1": {
+      "lat": -23.442463750755188,
+      "lng": -47.44796932773089
+    },
+    "Quiosque 2": {
+      "lat": -23.44232102314549,
+      "lng": -47.44801492528135
+    },
+    "Quadras de tenis 1 e 2": {
+      "lat": -23.441949438466548,
+      "lng": -47.44938285184038
+    },
+    "Quadra poliesportiva": {
+      "lat": -23.441617226111916,
+      "lng": -47.449610839605505
+    },
+    "Academia ao ar livre": {
+      "lat": -23.441255482828737,
+      "lng": -47.449752996674555
+    },
+    "Espaço Pet": {
+      "lat": -23.439359870841333,
+      "lng": -47.45038379605434
+    },
+    "Parquinho / playground do Lago": {
+      "lat": -23.439411549255144,
+      "lng": -47.45013166842243
+    },
+    "Lago 1": {
+      "lat": -23.440710595686216,
+      "lng": -47.44950402750768
+    },
+    "Lago 2": {
+      "lat": -23.439984642284628,
+      "lng": -47.44976420177669
+    },
+    "Lago 3": {
+      "lat": -23.43917947799386,
+      "lng": -47.44981111938618
+    },
+    "Trilha ecológica": {
+      "lat": -23.44170667389396,
+      "lng": -47.44814888034575
+    },
+    "Campo": {
+      "lat": -23.44005075080339,
+      "lng": -47.44670562108646
+    }
+  }
+}
+
