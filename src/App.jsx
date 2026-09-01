@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
 import locationsData from '../locations.json'
 import {
-  buildNavigationLinks,
   filterLocations,
   findLocation,
   generateAllLocations,
+  openNavigation,
 } from './location-utils.js'
 
 const BRAND_ASSETS = {
@@ -48,16 +48,6 @@ function PinIcon() {
   )
 }
 
-function RouteIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="6" cy="19" r="2" />
-      <circle cx="18" cy="5" r="2" />
-      <path d="M8 19h3a3 3 0 0 0 3-3V8a3 3 0 0 1 3-3" />
-    </svg>
-  )
-}
-
 export default function App() {
   const allLocations = useMemo(() => generateAllLocations(locationsData), [])
   const [searchTerm, setSearchTerm] = useState('')
@@ -94,8 +84,9 @@ export default function App() {
     setSelectedLocation(location)
     setMessage({
       type: 'success',
-      text: 'Local encontrado. Escolha o aplicativo para iniciar a rota.',
+      text: 'Destino encontrado. Abrindo a rota automaticamente…',
     })
+    openNavigation(location.coordinates)
   }
 
   function handleSubmit(event) {
@@ -147,7 +138,7 @@ export default function App() {
             <div className="search-intro">
               <span className="eyebrow">Navegação inteligente</span>
               <h1 id="page-title">Encontre seu destino no Ibiti Reserva</h1>
-              <p>Digite uma unidade ou área comum e escolha seu aplicativo de GPS.</p>
+              <p>Digite uma unidade ou área comum e toque no destino para abrir a rota automaticamente.</p>
             </div>
 
             {selectedLocation && (
@@ -200,7 +191,7 @@ export default function App() {
 
               <button className="search-button" type="submit">
                 <SearchIcon />
-                Encontrar localização
+                Abrir rota
               </button>
             </form>
 
@@ -210,36 +201,6 @@ export default function App() {
               </div>
             )}
 
-            {selectedLocation?.coordinates && (
-              <nav className="navigation-options" aria-label="Aplicativos de navegação">
-                {(() => {
-                  const links = buildNavigationLinks(selectedLocation.coordinates)
-
-                  return (
-                    <>
-                      <a
-                        className="navigation-button google-maps-button"
-                        href={links.googleMaps}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <RouteIcon />
-                        Google Maps
-                      </a>
-                      <a
-                        className="navigation-button waze-button"
-                        href={links.waze}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <RouteIcon />
-                        Waze
-                      </a>
-                    </>
-                  )
-                })()}
-              </nav>
-            )}
           </section>
 
           <section className="map-panel" aria-labelledby="map-title">

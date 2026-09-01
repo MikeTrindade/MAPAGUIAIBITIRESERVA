@@ -52,12 +52,19 @@ export function filterLocations(allLocations, value, limit = 10) {
     .slice(0, limit)
 }
 
-export function buildNavigationLinks(coordinates) {
+export function buildNavigationUrl(coordinates) {
   const destination = `${coordinates.lat},${coordinates.lng}`
   const encodedDestination = encodeURIComponent(destination)
 
-  return {
-    googleMaps: `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}&travelmode=driving`,
-    waze: `https://www.waze.com/ul?ll=${encodedDestination}&navigate=yes`,
-  }
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}&travelmode=driving&dir_action=navigate`
+}
+
+export function openNavigation(
+  coordinates,
+  navigate = (url) => window.location.assign(url),
+) {
+  const navigationUrl = buildNavigationUrl(coordinates)
+  navigate(navigationUrl)
+
+  return navigationUrl
 }

@@ -2,11 +2,12 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import locationsData from '../locations.json' with { type: 'json' }
 import {
-  buildNavigationLinks,
+  buildNavigationUrl,
   filterLocations,
   findLocation,
   generateAllLocations,
   normalizeLocationName,
+  openNavigation,
 } from './location-utils.js'
 
 const locations = generateAllLocations(locationsData)
@@ -40,18 +41,27 @@ test('preserva as coordenadas residenciais já cadastradas', () => {
   })
 })
 
-test('gera links com o destino definido para Google Maps e Waze', () => {
-  const links = buildNavigationLinks({
+test('gera uma rota universal com o destino definido', () => {
+  const navigationUrl = buildNavigationUrl({
     lat: -23.43820695194719,
     lng: -47.447510367357154,
   })
 
   assert.equal(
-    links.googleMaps,
-    'https://www.google.com/maps/dir/?api=1&destination=-23.43820695194719%2C-47.447510367357154&travelmode=driving',
+    navigationUrl,
+    'https://www.google.com/maps/dir/?api=1&destination=-23.43820695194719%2C-47.447510367357154&travelmode=driving&dir_action=navigate',
   )
-  assert.equal(
-    links.waze,
-    'https://www.waze.com/ul?ll=-23.43820695194719%2C-47.447510367357154&navigate=yes',
-  )
+})
+
+test('abre a rota automaticamente com uma única ação', () => {
+  const openedUrls = []
+  const coordinates = {
+    lat: -23.43820695194719,
+    lng: -47.447510367357154,
+  }
+
+  const navigationUrl = openNavigation(coordinates, (url) => openedUrls.push(url))
+
+  assert.deepEqual(openedUrls, [navigationUrl])
+  assert.match(navigationUrl, /destination=-23\.43820695194719%2C-47\.447510367357154/)
 })
