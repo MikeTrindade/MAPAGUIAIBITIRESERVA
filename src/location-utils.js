@@ -51,3 +51,13 @@ export function filterLocations(allLocations, value, limit = 10) {
     )
     .slice(0, limit)
 }
+
+export function buildNavigationLinks(coordinates) {
+  const destination = `${coordinates.lat},${coordinates.lng}`
+  const encodedDestination = encodeURIComponent(destination)
+
+  return {
+    googleMaps: `https://www.google.com/maps/dir/?api=1&destination=${encodedDestination}&travelmode=driving`,
+    waze: `https://www.waze.com/ul?ll=${encodedDestination}&navigate=yes`,
+  }
+}

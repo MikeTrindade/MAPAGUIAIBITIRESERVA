@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ibiti-digital-map-v2'
+const CACHE_NAME = 'ibiti-digital-map-v3'
 const APP_SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg']
 
 self.addEventListener('install', (event) => {

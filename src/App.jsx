@@ -1,15 +1,17 @@
 import { useMemo, useState } from 'react'
 import locationsData from '../locations.json'
 import {
+  buildNavigationLinks,
   filterLocations,
   findLocation,
   generateAllLocations,
 } from './location-utils.js'
 
 const BRAND_ASSETS = {
-  association: '/assets/ibiti-reserva.jpg',
-  product: '/assets/ibiti-digital-map.png',
-  developer: '/assets/mike-trindade.png',
+  association: '/assets/ibiti-reserva.png',
+  product: '/assets/zelunexa-guia.png',
+  productIcon: '/assets/zelunexa-guia-icon.png',
+  map: '/assets/ibiti-reserva-map.jpg',
 }
 
 function BrandImage({ src, alt, className, fallback }) {
@@ -46,6 +48,16 @@ function PinIcon() {
   )
 }
 
+function RouteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="6" cy="19" r="2" />
+      <circle cx="18" cy="5" r="2" />
+      <path d="M8 19h3a3 3 0 0 0 3-3V8a3 3 0 0 1 3-3" />
+    </svg>
+  )
+}
+
 export default function App() {
   const allLocations = useMemo(() => generateAllLocations(locationsData), [])
   const [searchTerm, setSearchTerm] = useState('')
@@ -57,13 +69,6 @@ export default function App() {
     () => filterLocations(allLocations, searchTerm),
     [allLocations, searchTerm],
   )
-
-  function startNavigation(location) {
-    const { lat, lng } = location.coordinates
-    const geoUrl = `geo:${lat},${lng}`
-
-    window.open(geoUrl, '_blank', 'noopener,noreferrer')
-  }
 
   function search(locationName = searchTerm) {
     const location = findLocation(allLocations, locationName)
@@ -87,8 +92,10 @@ export default function App() {
     }
 
     setSelectedLocation(location)
-    setMessage({ type: 'success', text: 'Local encontrado. Abrindo a navegação…' })
-    startNavigation(location)
+    setMessage({
+      type: 'success',
+      text: 'Local encontrado. Escolha o aplicativo para iniciar a rota.',
+    })
   }
 
   function handleSubmit(event) {
@@ -107,103 +114,158 @@ export default function App() {
     <div className="app-shell">
       <header className="site-header">
         <div className="header-content">
+          <div className="association-brand">
+            <BrandImage
+              src={BRAND_ASSETS.association}
+              alt="Ibiti Reserva"
+              className="association-logo"
+              fallback="Ibiti Reserva"
+            />
+            <strong>GUIA DIGITAL IBITI RESERVA</strong>
+          </div>
           <BrandImage
-            src={BRAND_ASSETS.association}
-            alt="Ibiti Reserva"
-            className="association-logo"
-            fallback="Ibiti Reserva"
-          />
-          <BrandImage
-            src={BRAND_ASSETS.developer}
-            alt="Mike Trindade — Desenvolvedor"
-            className="developer-logo"
-            fallback="Mike Trindade"
+            src={BRAND_ASSETS.productIcon}
+            alt="Zelunexa Guia"
+            className="header-product-icon"
+            fallback="Zelunexa Guia"
           />
         </div>
       </header>
 
       <main className="main-content">
-        <section className="search-panel" aria-labelledby="page-title">
-          <div className="product-brand">
-            <BrandImage
-              src={BRAND_ASSETS.product}
-              alt="Ibiti Digital Map"
-              className="product-logo"
-              fallback="Ibiti Digital Map"
-            />
-            <h1 id="page-title">Encontre seu destino no Ibiti Reserva</h1>
-            <p>Digite uma unidade ou área comum para iniciar a navegação.</p>
-          </div>
-
-          {selectedLocation && (
-            <div className="selected-location" aria-live="polite">
-              <PinIcon />
-              <div>
-                <span>Destino selecionado</span>
-                <strong>{selectedLocation.name}</strong>
-              </div>
-            </div>
-          )}
-
-          <form className="search-form" onSubmit={handleSubmit}>
-            <label htmlFor="location-search">Unidade ou local</label>
-            <div className="search-control">
-              <span className="search-icon"><SearchIcon /></span>
-              <input
-                id="location-search"
-                type="search"
-                value={searchTerm}
-                onChange={handleChange}
-                onFocus={() => setShowSuggestions(true)}
-                placeholder="Ex.: D5-01 ou Piscinas"
-                autoComplete="off"
-                aria-autocomplete="list"
-                aria-controls="location-suggestions"
-                aria-expanded={showSuggestions && suggestions.length > 0}
+        <div className="content-grid">
+          <section className="search-panel" aria-labelledby="page-title">
+            <div className="product-brand">
+              <BrandImage
+                src={BRAND_ASSETS.product}
+                alt="Zelunexa Guia — Conectar para zelar"
+                className="product-logo"
+                fallback="Zelunexa Guia"
               />
+            </div>
 
-              {showSuggestions && suggestions.length > 0 && (
-                <ul id="location-suggestions" className="suggestions" role="listbox">
-                  {suggestions.map((suggestion) => (
-                    <li key={suggestion.name}>
-                      <button
-                        type="button"
-                        onClick={() => search(suggestion.name)}
-                        role="option"
+            <div className="search-intro">
+              <span className="eyebrow">Navegação inteligente</span>
+              <h1 id="page-title">Encontre seu destino no Ibiti Reserva</h1>
+              <p>Digite uma unidade ou área comum e escolha seu aplicativo de GPS.</p>
+            </div>
+
+            {selectedLocation && (
+              <div className="selected-location" aria-live="polite">
+                <PinIcon />
+                <div>
+                  <span>Destino selecionado</span>
+                  <strong>{selectedLocation.name}</strong>
+                </div>
+              </div>
+            )}
+
+            <form className="search-form" onSubmit={handleSubmit}>
+              <label htmlFor="location-search">Unidade ou local</label>
+              <div className="search-control">
+                <span className="search-icon"><SearchIcon /></span>
+                <input
+                  id="location-search"
+                  type="search"
+                  value={searchTerm}
+                  onChange={handleChange}
+                  onFocus={() => setShowSuggestions(true)}
+                  placeholder="Ex.: D5-01 ou Piscinas"
+                  autoComplete="off"
+                  aria-autocomplete="list"
+                  aria-controls="location-suggestions"
+                  aria-expanded={showSuggestions && suggestions.length > 0}
+                />
+
+                {showSuggestions && suggestions.length > 0 && (
+                  <ul id="location-suggestions" className="suggestions" role="listbox">
+                    {suggestions.map((suggestion) => (
+                      <li key={suggestion.name}>
+                        <button
+                          type="button"
+                          onClick={() => search(suggestion.name)}
+                          role="option"
+                        >
+                          <PinIcon />
+                          <span>{suggestion.name}</span>
+                          <small>
+                            {suggestion.type === 'unidade' ? 'Unidade' : 'Área comum'}
+                          </small>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              <button className="search-button" type="submit">
+                <SearchIcon />
+                Encontrar localização
+              </button>
+            </form>
+
+            {message && (
+              <div className={`message message-${message.type}`} role="status">
+                {message.text}
+              </div>
+            )}
+
+            {selectedLocation?.coordinates && (
+              <nav className="navigation-options" aria-label="Aplicativos de navegação">
+                {(() => {
+                  const links = buildNavigationLinks(selectedLocation.coordinates)
+
+                  return (
+                    <>
+                      <a
+                        className="navigation-button google-maps-button"
+                        href={links.googleMaps}
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        <PinIcon />
-                        <span>{suggestion.name}</span>
-                        <small>
-                          {suggestion.type === 'unidade' ? 'Unidade' : 'Área comum'}
-                        </small>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                        <RouteIcon />
+                        Google Maps
+                      </a>
+                      <a
+                        className="navigation-button waze-button"
+                        href={links.waze}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <RouteIcon />
+                        Waze
+                      </a>
+                    </>
+                  )
+                })()}
+              </nav>
+            )}
+          </section>
 
-            <button className="search-button" type="submit">
-              <SearchIcon />
-              Encontrar localização
-            </button>
-          </form>
-
-          {message && (
-            <div className={`message message-${message.type}`} role="status">
-              {message.text}
-              {selectedLocation?.coordinates && (
-                <button type="button" onClick={() => startNavigation(selectedLocation)}>
-                  Abrir novamente
-                </button>
-              )}
+          <section className="map-panel" aria-labelledby="map-title">
+            <div className="map-panel-heading">
+              <span className="eyebrow">Referência visual</span>
+              <h2 id="map-title">Mapa do Ibiti Reserva</h2>
+              <p>Consulte a implantação geral e toque na imagem para ampliar.</p>
             </div>
-          )}
-        </section>
+            <a
+              className="map-link"
+              href={BRAND_ASSETS.map}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Ampliar mapa ilustrativo do Ibiti Reserva"
+            >
+              <img src={BRAND_ASSETS.map} alt="Mapa ilustrativo do Parque Ibiti Reserva" />
+              <span>Ampliar mapa</span>
+            </a>
+            <small>Mapa ilustrativo — não utilizar para locação de divisas.</small>
+          </section>
+        </div>
       </main>
 
       <footer className="site-footer">
-        © Todos os direitos reservados | Desenvolvido por Mike Trindade
+        <span>© 2026 Zelunexa — Todos os direitos reservados.</span>
+        <span>Guia Digital Ibiti Reserva</span>
       </footer>
     </div>
   )

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import locationsData from '../locations.json' with { type: 'json' }
 import {
+  buildNavigationLinks,
   filterLocations,
   findLocation,
   generateAllLocations,
@@ -37,4 +38,20 @@ test('preserva as coordenadas residenciais já cadastradas', () => {
     lat: -23.439878922806496,
     lng: -47.450280028240336,
   })
+})
+
+test('gera links com o destino definido para Google Maps e Waze', () => {
+  const links = buildNavigationLinks({
+    lat: -23.43820695194719,
+    lng: -47.447510367357154,
+  })
+
+  assert.equal(
+    links.googleMaps,
+    'https://www.google.com/maps/dir/?api=1&destination=-23.43820695194719%2C-47.447510367357154&travelmode=driving',
+  )
+  assert.equal(
+    links.waze,
+    'https://www.waze.com/ul?ll=-23.43820695194719%2C-47.447510367357154&navigate=yes',
+  )
 })
