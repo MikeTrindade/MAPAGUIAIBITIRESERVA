@@ -1,0 +1,20 @@
+{
+  "name": "Guia Digital Ibiti Reserva",
+  "short_name": "Guia Ibiti",
+  "description": "Encontre unidades e áreas comuns do Ibiti Reserva com Zelunexa Guia.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7fcff",
+  "theme_color": "#0582ca",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
